@@ -3,24 +3,39 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { register, reset } from '../features/auth/authSlice';
 
+// Import the CSS Module
+import styles from './Register.module.css'; 
+
+// Import MUI components for form fields
+import {
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  CircularProgress,
+} from '@mui/material';
+
 function Register() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     password2: '',
-    role: 'Student', // Default role
+    role: 'Student',
   });
 
   const { name, email, password, password2, role } = formData;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
 
   useEffect(() => {
     if (isError) {
-      alert(message); // Replace with a toast notification in a real app
+      alert(message);
     }
     if (isSuccess || user) {
       navigate('/');
@@ -45,31 +60,67 @@ function Register() {
     }
   };
 
-  if (isLoading) {
-    return <h3>Loading...</h3>;
-  }
-
   return (
-    <>
-      <section className='heading'>
-        <h1>Register</h1>
-        <p>Please create an account</p>
-      </section>
-      <section className='form'>
-        <form onSubmit={onSubmit}>
-          {/* Form inputs for name, email, password, password2 */}
-          <div className='form-group'>
-            <select name="role" value={role} onChange={onChange}>
-                <option value="Student">I am a Student</option>
-                <option value="Teacher">I am a Teacher</option>
-            </select>
-          </div>
-          <div className='form-group'>
-            <button type='submit' className='btn btn-block'>Submit</button>
-          </div>
-        </form>
-      </section>
-    </>
+    <div className={styles.container}>
+      <h1 className={styles.heading}>Register</h1>
+      <p className={styles.subheading}>Please create an account</p>
+
+      <form onSubmit={onSubmit} className={styles.form}>
+        <TextField
+          required
+          fullWidth
+          label="Full Name"
+          name="name"
+          value={name}
+          onChange={onChange}
+        />
+        <TextField
+          required
+          fullWidth
+          label="Email Address"
+          name="email"
+          value={email}
+          onChange={onChange}
+        />
+        <TextField
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          value={password}
+          onChange={onChange}
+        />
+        <TextField
+          required
+          fullWidth
+          name="password2"
+          label="Confirm Password"
+          type="password"
+          value={password2}
+          onChange={onChange}
+        />
+        <FormControl fullWidth>
+          <InputLabel>I am a...</InputLabel>
+          <Select
+            name="role"
+            value={role}
+            label="I am a..."
+            onChange={onChange}
+          >
+            <MenuItem value={'Student'}>Student</MenuItem>
+            <MenuItem value={'Teacher'}>Teacher</MenuItem>
+          </Select>
+        </FormControl>
+        <button
+          type="submit"
+          className={styles.button}
+          disabled={isLoading}
+        >
+          {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Register'}
+        </button>
+      </form>
+    </div>
   );
 }
 
