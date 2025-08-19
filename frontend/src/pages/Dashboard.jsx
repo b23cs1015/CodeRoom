@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Ensure Link is imported
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './Dashboard.module.css';
 import {
   createClassroom,
   getClassrooms,
-  joinClassroom, // Import joinClassroom
+  joinClassroom,
 } from '../features/classrooms/classroomSlice';
 import { TextField } from '@mui/material';
 
@@ -18,20 +18,28 @@ function Dashboard() {
     (state) => state.classrooms
   );
 
-  // State for the create form (Teacher)
   const [createData, setCreateData] = useState({ name: '', subject: '' });
   const { name, subject } = createData;
 
-  // State for the join form (Student)
   const [joinCode, setJoinCode] = useState('');
 
   useEffect(() => {
-    // ... (existing useEffect logic)
-    // We added a check for isSuccess to re-fetch classrooms after joining
-    if (isSuccess) {
-        dispatch(getClassrooms());
+    if (isError) {
+      console.error(message);
     }
-  }, [user, navigate, isError, isSuccess, message, dispatch]);
+
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+
+    dispatch(getClassrooms());
+
+    if (isSuccess) {
+      // After a successful action, reset the success flag and re-fetch
+      dispatch(getClassrooms());
+    }
+  }, [user, navigate, isError, message, dispatch, isSuccess]);
 
   const onCreateChange = (e) => {
     setCreateData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
@@ -43,11 +51,10 @@ function Dashboard() {
     setCreateData({ name: '', subject: '' });
   };
 
-  // Handler for joining a class
   const onJoinSubmit = (e) => {
     e.preventDefault();
     dispatch(joinClassroom(joinCode));
-    setJoinCode(''); // Clear the input field
+    setJoinCode('');
   };
 
   if (isLoading && classrooms.length === 0) {
@@ -89,14 +96,19 @@ function Dashboard() {
         <h2>Your Classrooms</h2>
         {classrooms.length > 0 ? (
           <div className={styles.grid}>
+            {/* 👇 THIS IS THE UPDATED SECTION 👇 */}
             {classrooms.map((classroom) => (
-              <div key={classroom._id} className={styles.classCard}>
-                <h3>{classroom.name}</h3>
-                <p>{classroom.subject}</p>
-                {user.role === 'Teacher' && (
-                  <p className={styles.joinCode}>Code: <strong>{classroom.joinCode}</strong></p>
-                )}
-              </div>
+              <Link to={`/classroom/${classroom._id}`} key={classroom._id} className={styles.cardLink}>
+                <div className={styles.classCard}>
+                  <h3>{classroom.name}</h3>
+                  <p>{classroom.subject}</p>
+                  {user.role === 'Teacher' && (
+                    <p className={styles.joinCode}>
+                      Code: <strong>{classroom.joinCode}</strong>
+                    </p>
+                  )}
+                </div>
+              </Link>
             ))}
           </div>
         ) : (

@@ -36,9 +36,20 @@ const joinClassroom = async (joinCode, token) => {
     return response.data;
   };
 
+const getOneClassroom = async (classroomId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.get(API_URL + classroomId, config);
+  return response.data;
+};
+
 const classroomService = {
   createClassroom,
   getClassrooms,
-  joinClassroom, // Make sure this is exported
+  joinClassroom,
+  getOneClassroom,
 };
 export default classroomService;
