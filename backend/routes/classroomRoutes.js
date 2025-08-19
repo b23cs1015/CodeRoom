@@ -1,13 +1,19 @@
 import express from 'express';
 const router = express.Router();
-import { createClassroom, getMyClassrooms } from '../controllers/classroomController.js';
-import { protect, teacher } from '../middleware/authMiddleware.js';
+import {
+  createClassroom,
+  getClassrooms,
+  joinClassroom
+} from '../controllers/classroomController.js';
+import { protect } from '../middleware/authMiddleware.js';
 
-router.route('/').post(protect, teacher, createClassroom).get(protect, teacher, getMyClassrooms);
+// Route to get all relevant classrooms (for both students and teachers)
+router.route('/').get(protect, getClassrooms);
 
-// Example for other routes:
-// router.route('/:id').get(protect, getClassroomDetails);
-// router.route('/:id/join').post(protect, joinClassroom);
-// router.route('/:id/announcements').post(protect, teacher, createAnnouncement);
+// Route for teachers to create classrooms
+router.route('/create').post(protect, createClassroom); // Add teacher middleware later if needed
+
+// Route for students to join a classroom
+router.route('/join').post(protect, joinClassroom); // Add student middleware later if needed
 
 export default router;
