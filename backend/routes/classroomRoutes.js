@@ -3,7 +3,8 @@ const router = express.Router();
 import {
   createClassroom,
   getClassrooms,
-  joinClassroom
+  joinClassroom,
+  getClassroomById
 } from '../controllers/classroomController.js';
 import { protect } from '../middleware/authMiddleware.js';
 
@@ -15,5 +16,7 @@ router.route('/create').post(protect, createClassroom); // Add teacher middlewar
 
 // Route for students to join a classroom
 router.route('/join').post(protect, joinClassroom); // Add student middleware later if needed
+
+router.route('/:id').get(protect, getClassroomById);
 
 export default router;

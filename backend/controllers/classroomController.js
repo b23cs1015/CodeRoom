@@ -55,7 +55,32 @@ const joinClassroom = async (req, res) => {
     await classroom.save();
 
     res.status(200).json({ message: 'Successfully joined the classroom' });
+};// ... (keep existing functions: createClassroom, getClassrooms, joinClassroom)
+
+// @desc    Get a single classroom by ID
+// @route   GET /api/classrooms/:id
+// @access  Private
+const getClassroomById = async (req, res) => {
+  const classroom = await Classroom.findById(req.params.id);
+
+  if (!classroom) {
+    res.status(404);
+    throw new Error('Classroom not found');
+  }
+
+  // Security Check: Ensure the user is either the teacher or an enrolled student
+  const isTeacher = classroom.teacher.toString() === req.user._id.toString();
+  const isStudent = classroom.students.some(
+    (studentId) => studentId.toString() === req.user._id.toString()
+  );
+
+  if (!isTeacher && !isStudent) {
+    res.status(401);
+    throw new Error('Not authorized to access this classroom');
+  }
+
+  res.status(200).json(classroom);
 };
 
-
-export { createClassroom, getClassrooms, joinClassroom };
+// Don't forget to export the new function
+export { createClassroom, getClassrooms, joinClassroom, getClassroomById };

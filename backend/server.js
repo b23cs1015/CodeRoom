@@ -5,6 +5,7 @@ import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import authRoutes from './routes/authRoutes.js';
 import classroomRoutes from './routes/classroomRoutes.js';
+import announcementRoutes from './routes/announcementRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 // API Routes
 app.use('/api/users', authRoutes);
 app.use('/api/classrooms', classroomRoutes);
+app.use('/api/classrooms/:classroomId/announcements', announcementRoutes);
 
 // Error Handling Middleware
 app.use(notFound);
