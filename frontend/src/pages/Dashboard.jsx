@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Ensure Link is imported
+import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './Dashboard.module.css';
 import {
   createClassroom,
   getClassrooms,
   joinClassroom,
+  reset as resetClassrooms,
 } from '../features/classrooms/classroomSlice';
 import { TextField } from '@mui/material';
 
@@ -13,8 +14,8 @@ function Dashboard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => state.auth);
-  const { classrooms, isLoading, isError, isSuccess, message } = useSelector(
+  const { user, isLoading: isAuthLoading } = useSelector((state) => state.auth);
+  const { classrooms, isLoading, isError, message } = useSelector(
     (state) => state.classrooms
   );
 
@@ -23,6 +24,7 @@ function Dashboard() {
 
   const [joinCode, setJoinCode] = useState('');
 
+  // 👇 CORRECTED useEffect LOGIC 👇
   useEffect(() => {
     if (isError) {
       console.error(message);
@@ -30,16 +32,16 @@ function Dashboard() {
 
     if (!user) {
       navigate('/login');
-      return;
-    }
-
-    dispatch(getClassrooms());
-
-    if (isSuccess) {
-      // After a successful action, reset the success flag and re-fetch
+    } else {
+      // Fetch classrooms only when the user is available
       dispatch(getClassrooms());
     }
-  }, [user, navigate, isError, message, dispatch, isSuccess]);
+
+    // This cleanup function will run when the component unmounts
+    return () => {
+      dispatch(resetClassrooms());
+    };
+  }, [user, navigate, dispatch, isError, message]); // Removed isSuccess from dependencies
 
   const onCreateChange = (e) => {
     setCreateData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
@@ -57,7 +59,7 @@ function Dashboard() {
     setJoinCode('');
   };
 
-  if (isLoading && classrooms.length === 0) {
+  if (isAuthLoading || !user) {
     return <h1>Loading...</h1>;
   }
 
@@ -94,9 +96,8 @@ function Dashboard() {
 
       <div className={styles.classList}>
         <h2>Your Classrooms</h2>
-        {classrooms.length > 0 ? (
+        {isLoading ? (<p>Loading classrooms...</p>) : classrooms.length > 0 ? (
           <div className={styles.grid}>
-            {/* 👇 THIS IS THE UPDATED SECTION 👇 */}
             {classrooms.map((classroom) => (
               <Link to={`/classroom/${classroom._id}`} key={classroom._id} className={styles.cardLink}>
                 <div className={styles.classCard}>

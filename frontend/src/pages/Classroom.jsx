@@ -6,8 +6,9 @@ import {
   getAnnouncements,
   createAnnouncement,
   reset as resetAnnouncements,
-} from '../features/announcements/announcementSlice'; // Verify this path matches your folder structure
+} from '../features/announcements/announcementSlice';
 import styles from './Classroom.module.css';
+import StudyMaterials from '../components/StudyMaterials'; // Your import is correct
 
 function Classroom() {
   const { classroomId } = useParams();
@@ -62,7 +63,6 @@ function Classroom() {
       <main className={styles.mainContent}>
         <div className={styles.announcementsSection}>
           <h2>Announcements</h2>
-
           {user.role === 'Teacher' && (
             <form onSubmit={onSubmit} className={styles.announcementForm}>
               <textarea
@@ -91,6 +91,9 @@ function Classroom() {
             )}
           </div>
         </div>
+        
+        {/* 👇 THIS IS THE NEWLY ADDED PART 👇 */}
+        <StudyMaterials classroomId={classroomId} userRole={user.role} />
       </main>
     </div>
   );

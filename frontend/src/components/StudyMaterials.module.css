@@ -1,0 +1,49 @@
+.materialsSection {
+  margin-top: 2rem;
+}
+
+.uploadForm {
+  margin: 1.5rem 0;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.uploadForm input {
+  font-family: 'Roboto', sans-serif;
+}
+
+.uploadForm button {
+  padding: 0.6rem 1.5rem;
+  background-color: #1e88e5; /* A slightly different blue */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.uploadForm button:disabled {
+  background-color: #9e9e9e;
+  cursor: not-allowed;
+}
+
+.materialList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.materialItem {
+  display: block;
+  padding: 1rem;
+  background-color: #f4f7f6;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.materialItem:hover {
+  background-color: #e9ecef;
+}
