@@ -1,3 +1,4 @@
+import path from 'path'; // ✅ This line was missing
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
@@ -6,6 +7,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import authRoutes from './routes/authRoutes.js';
 import classroomRoutes from './routes/classroomRoutes.js';
 import announcementRoutes from './routes/announcementRoutes.js';
+import materialRoutes from './routes/materialRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -24,6 +26,10 @@ app.get('/', (req, res) => {
 app.use('/api/users', authRoutes);
 app.use('/api/classrooms', classroomRoutes);
 app.use('/api/classrooms/:classroomId/announcements', announcementRoutes);
+app.use('/api/classrooms/:classroomId/materials', materialRoutes);
+
+const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 // Error Handling Middleware
 app.use(notFound);
