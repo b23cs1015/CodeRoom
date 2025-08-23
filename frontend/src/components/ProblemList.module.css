@@ -1,0 +1,77 @@
+.problemListSection {
+  max-width: 900px;
+  margin: auto;
+}
+
+.problemList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.problemList li {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.problemList li:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.problemLink {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.problemInfo span {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
+.problemInfo small {
+  color: var(--text-muted-color);
+  margin-top: 0.25rem;
+}
+
+.submissionCount {
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: var(--bg-color);
+  color: var(--text-muted-color);
+  padding: 0.4rem 0.8rem;
+  border-radius: 1rem;
+}
+
+.teacherLinks {
+  display: flex;
+  gap: 0.75rem;
+  padding-right: 1.5rem;
+}
+
+.submissionsLink, .editLink {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background-color: #333;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.submissionsLink:hover, .editLink:hover {
+  background-color: #444;
+}

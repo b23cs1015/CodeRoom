@@ -1,14 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { logout, reset } from '../features/auth/authSlice';
-
-// Import the CSS Module
 import styles from './Header.module.css';
 
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   const { user } = useSelector((state) => state.auth);
 
   const onLogout = () => {
@@ -22,16 +21,34 @@ function Header() {
       <Link to='/' className={styles.logo}>
         CodeRoom
       </Link>
-      <nav className={styles.navLinks}>
+      <ul className={styles.navLinks}>
         {user ? (
-          <a href="#!" onClick={onLogout}>Logout</a>
+          <>
+            {location.pathname !== '/' && (
+              <li>
+                <Link to='/'>Dashboard</Link>
+              </li>
+            )}
+            {user.role === 'Student' && (
+              <li>
+                <Link to='/my-scores'>My Scores</Link>
+              </li>
+            )}
+            <li>
+              <button onClick={onLogout} className={styles.logoutButton}>Logout</button>
+            </li>
+          </>
         ) : (
           <>
-            <Link to='/login'>Login</Link>
-            <Link to='/register'>Register</Link>
+            <li>
+              <Link to='/login'>Login</Link>
+            </li>
+            <li>
+              <Link to='/register'>Register</Link>
+            </li>
           </>
         )}
-      </nav>
+      </ul>
     </header>
   );
 }

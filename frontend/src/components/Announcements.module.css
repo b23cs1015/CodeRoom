@@ -1,0 +1,113 @@
+/* Dark mode variables */
+:root {
+  --bg-color: #181818;
+  --surface-color: #23272f;
+  --border-color: #2c2f36;
+  --text-color: #fff;
+  --text-muted-color: #b0b0b0;
+  --accent-color: #3a86ff;
+  --shadow: 0 4px 24px 0 rgba(0,0,0,0.25);
+}
+
+/* White text utility */
+.whiteText {
+  color: var(--text-color) !important;
+}
+
+/* Modern button style */
+.modernButton {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.modernButton:hover {
+  background: #2656b6;
+  box-shadow: 0 6px 32px 0 rgba(58,134,255,0.18);
+}
+
+.announcementsSection {
+  max-width: 800px;
+  margin: auto;
+  background: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.announcementForm {
+  background: var(--surface-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.announcementForm textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 1rem;
+  background: var(--bg-color);
+  color: var(--text-color);
+  box-shadow: var(--shadow);
+  outline: none;
+  transition: border 0.2s;
+}
+.announcementForm textarea:focus {
+  border-color: var(--accent-color);
+}
+
+.announcementForm button {
+  display: block;
+  width: auto;
+  margin-left: auto;
+  margin-top: 1rem;
+  padding: 0.6rem 1.5rem;
+  background: var(--accent-color);
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  font-weight: 500;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.announcementForm button:hover {
+  background: #2656b6;
+  box-shadow: 0 6px 32px 0 rgba(58,134,255,0.18);
+}
+
+.announcementList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.announcementCard {
+  background-color: var(--surface-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.announcementCard p {
+  margin-top: 0;
+  white-space: pre-wrap;
+  color: var(--text-color);
+}
+
+.announcementCard small {
+  color: var(--text-muted-color);
+}

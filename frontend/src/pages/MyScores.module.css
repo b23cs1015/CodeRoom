@@ -1,0 +1,57 @@
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.scoresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); /* Expanded min width */
+  gap: 2rem; /* More gap for spacious look */
+  margin-top: 2rem;
+}
+
+.scoreCard {
+  background: #23272f; /* Remove gradient, use solid dark */
+  border: 2px solid #3a86ff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 24px 0 rgba(58,134,255,0.18);
+  color: #fff;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+}
+.scoreCard:hover {
+  box-shadow: 0 8px 32px 0 rgba(58,134,255,0.22);
+  border-color: #2656b6;
+}
+
+.scoreCard h3 {
+  margin-top: 0;
+  color: #3a86ff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.score {
+  font-size: 1.35rem;
+  margin: 1rem 0;
+  color: #4caf50;
+  background: #181818;
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px 0 rgba(58,134,255,0.10);
+  border: 1px solid #4caf50;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.date {
+  font-size: 0.98rem;
+  color: #b0b0b0;
+  margin-bottom: 0;
+}

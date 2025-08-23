@@ -8,7 +8,6 @@ import {
   joinClassroom,
   reset as resetClassrooms,
 } from '../features/classrooms/classroomSlice';
-import { TextField } from '@mui/material';
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -24,7 +23,6 @@ function Dashboard() {
 
   const [joinCode, setJoinCode] = useState('');
 
-  // 👇 CORRECTED useEffect LOGIC 👇
   useEffect(() => {
     if (isError) {
       console.error(message);
@@ -33,15 +31,13 @@ function Dashboard() {
     if (!user) {
       navigate('/login');
     } else {
-      // Fetch classrooms only when the user is available
       dispatch(getClassrooms());
     }
 
-    // This cleanup function will run when the component unmounts
     return () => {
       dispatch(resetClassrooms());
     };
-  }, [user, navigate, dispatch, isError, message]); // Removed isSuccess from dependencies
+  }, [user, navigate, dispatch, isError, message]);
 
   const onCreateChange = (e) => {
     setCreateData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
@@ -67,39 +63,64 @@ function Dashboard() {
     <div className={styles.dashboard}>
       <h1 className={styles.heading}>Welcome, {user.name}</h1>
 
-      {user.role === 'Teacher' && (
-        <div className={styles.formCard}>
-          <h3>Create a New Classroom</h3>
-          <form onSubmit={onCreateSubmit} className={styles.form}>
-            <TextField label="Classroom Name" name="name" value={name} onChange={onCreateChange} required />
-            <TextField label="Subject" name="subject" value={subject} onChange={onCreateChange} required />
-            <button type="submit" className={styles.button}>Create Classroom</button>
-          </form>
-        </div>
-      )}
+      <div className={styles.formCardsRow}>
+        {user.role === 'Teacher' && (
+          <div className={styles.formCard} tabIndex={0}>
+            <h3 className={styles.formCardTitle}>Create a New Classroom</h3>
+            <form onSubmit={onCreateSubmit} className={styles.form}>
+              <div className={styles.inlineInputs}>
+                <input
+                  className={styles.formCardInput}
+                  name="name"
+                  value={name}
+                  onChange={onCreateChange}
+                  placeholder="Classroom Name"
+                  required
+                />
+                <input
+                  className={styles.formCardInput}
+                  name="subject"
+                  value={subject}
+                  onChange={onCreateChange}
+                  placeholder="Subject"
+                  required
+                />
+              </div>
+              <button type="submit" className={styles.formCardButton}>Create Classroom</button>
+            </form>
+          </div>
+        )}
 
-      {user.role === 'Student' && (
-        <div className={styles.formCard}>
-          <h3>Join a Classroom</h3>
-          <form onSubmit={onJoinSubmit} className={styles.form}>
-            <TextField
-              label="Enter Join Code"
-              name="joinCode"
-              value={joinCode}
-              onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
-              required
-            />
-            <button type="submit" className={styles.button}>Join</button>
-          </form>
-        </div>
-      )}
+        {user.role === 'Student' && (
+          <div className={styles.formCard} tabIndex={0}>
+            <h3 className={styles.formCardTitle}>Join a Classroom</h3>
+            <form onSubmit={onJoinSubmit} className={styles.form}>
+              <input
+                className={styles.formCardInput}
+                name="joinCode"
+                value={joinCode}
+                onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
+                placeholder="Enter Join Code"
+                required
+              />
+              <button type="submit" className={styles.formCardButton}>Join</button>
+            </form>
+          </div>
+        )}
+      </div>
 
       <div className={styles.classList}>
         <h2>Your Classrooms</h2>
-        {isLoading ? (<p>Loading classrooms...</p>) : classrooms.length > 0 ? (
+        {isLoading ? (
+          <p>Loading classrooms...</p>
+        ) : classrooms.length > 0 ? (
           <div className={styles.grid}>
             {classrooms.map((classroom) => (
-              <Link to={`/classroom/${classroom._id}`} key={classroom._id} className={styles.cardLink}>
+              <Link
+                to={`/classroom/${classroom._id}`}
+                key={classroom._id}
+                className={styles.cardLink}
+              >
                 <div className={styles.classCard}>
                   <h3>{classroom.name}</h3>
                   <p>{classroom.subject}</p>

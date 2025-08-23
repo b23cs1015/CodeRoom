@@ -1,0 +1,150 @@
+.container {
+  display: flex;
+  gap: 1.5rem;
+  height: calc(100vh - 70px); /* Full height minus header */
+  padding: 1.5rem;
+}
+
+.problemDetails {
+  flex: 1;
+  overflow-y: auto; /* Make details scrollable */
+  background-color: var(--surface-color);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.description {
+  white-space: pre-wrap;
+  line-height: 1.7;
+  color: var(--text-muted-color);
+}
+
+.testCase {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.testCase pre {
+  background: #0d0d0d;
+  padding: 0.75rem;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: var(--text-color);
+}
+
+.ide {
+  flex: 1.5; /* Give more space to the IDE */
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface-color);
+  border-radius: 12px;
+  overflow: hidden; /* Important for child elements */
+  border: 1px solid var(--border-color);
+}
+
+.controls {
+  padding: 0.75rem;
+  background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.controls select {
+  background-color: #333;
+  border-color: #444;
+  margin: 0;
+}
+
+/* Use global .btn class and add specifics */
+.runButton {
+  background-color: #333;
+  padding: 8px 16px;
+}
+.runButton:hover {
+  background-color: #444;
+}
+
+.submitButton {
+  background-color: var(--success-color);
+  margin-left: auto; /* Pushes it to the far right */
+  padding: 8px 16px;
+}
+.submitButton:hover {
+  background-color: #218838;
+}
+
+.editorWrapper {
+  flex-grow: 1;
+  background-color: #1e1e1e; /* Base color for the editor area */
+}
+
+/* This is the key change for visibility */
+.readOnlyEditor {
+  opacity: 0.5; /* Makes the non-editable code less visible */
+}
+
+.editableEditor {
+  min-height: 150px; /* Ensures the editable area is substantial */
+  border-top: 1px dashed var(--border-color);
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.output {
+  min-height: 200px;
+  max-height: 40%;
+  overflow-y: auto;
+  background-color: var(--bg-color);
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--text-color);
+}
+
+.pass {
+  color: var(--success-color);
+  font-weight: bold;
+}
+
+.fail {
+  color: var(--error-color);
+  font-weight: bold;
+}
+
+.resultCard {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.resultHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.resultCard pre {
+  background-color: var(--bg-color);
+}
+
+.testResultList {
+  margin: 1.5rem 0;
+  width: 100%;
+  max-width: 400px;
+}
+
+.testResultItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}

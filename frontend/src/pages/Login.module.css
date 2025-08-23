@@ -1,48 +1,55 @@
-/* The styling for Login is identical to Register, so you can copy the contents of Register.module.css */
 .container {
-  max-width: 400px;
-  margin: 2rem auto;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
+  max-width: 450px;
+  margin: 4rem auto; /* More vertical space */
+  padding: 2.5rem; /* A bit more padding */
+  background-color: var(--surface-color); /* Uses the dark surface color from our theme */
+  border-radius: 12px; /* Softer, more modern corners */
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* A more pronounced shadow for depth */
+}
+
+.title {
   text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #FFFFFF;
 }
 
-.heading {
+.formGroup {
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+
+.formGroup label {
+  display: block;
   margin-bottom: 0.5rem;
-  font-size: 2rem;
-  font-weight: 600;
+  font-weight: 500;
+  color: var(--text-muted-color);
 }
 
-.subheading {
-  margin-bottom: 2rem;
-  color: #666;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.button {
-  padding: 0.8rem 1.5rem;
+/* Use the global .btn class and add a specific class for width */
+.submitButton {
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 12px;
   font-size: 1rem;
-  font-weight: 600;
-  color: white;
-  background-color: #1976d2;
+  margin-top: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #3a86ff 60%, #2656b6 100%);
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px 0 rgba(58,134,255,0.18);
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: background 0.2s;
+}
+.submitButton:hover {
+  background: linear-gradient(90deg, #2656b6 60%, #3a86ff 100%);
 }
 
-.button:hover {
-  background-color: #1565c0;
-}
-
-.button:disabled {
-  background-color: #9e9e9e;
-  cursor: not-allowed;
+.linkText {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--text-muted-color);
 }

@@ -1,0 +1,52 @@
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #181818;
+    border-radius: 8px;
+}
+
+.questionBox {
+    margin-bottom: 2rem;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.optionLabel {
+    display: block;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.optionLabel:hover {
+    background: #3a86ff;
+}
+
+.submitButton {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.resultsContainer {
+    text-align: center;
+    padding: 3rem;
+}
+
+.score {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 2rem 0;
+}

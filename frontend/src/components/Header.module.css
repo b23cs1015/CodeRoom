@@ -1,28 +1,83 @@
 .header {
-  background-color: #1976d2;
-  color: white;
-  padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 64px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.2rem 2.5rem;
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+  height: 74px;
+  box-shadow: 0 2px 16px 0 rgba(58,134,255,0.10);
+  font-family: 'Inter', 'Segoe UI', 'Montserrat', Arial, sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-family: 'Montserrat', 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 2.1rem;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #3a86ff 40%, #2656b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  text-shadow: 0 2px 12px rgba(58,134,255,0.18);
+  margin-right: 2rem;
+  transition: text-shadow 0.2s;
+}
+
+.logo:hover {
+  text-shadow: 0 4px 24px rgba(58,134,255,0.28);
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', 'Montserrat', Arial, sans-serif;
 }
 
 .navLinks a {
-  color: white;
-  margin-left: 1.5rem;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.2s ease-in-out;
+  color: var(--text-muted-color);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: color 0.3s, background 0.2s;
+  text-decoration: none;
 }
 
-.navLinks a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.navLinks a:hover,
+.navLinks a.active {
+  color: var(--accent-color);
+  background: #23272f;
+}
+
+.logoutButton {
+  background: none;
+  border: 1.5px solid var(--error-color);
+  color: var(--error-color);
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+  height: 38px; /* Match nav link height for alignment */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.logoutButton:hover {
+  background: var(--error-color);
+  color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(229,115,115,0.18);
 }
