@@ -20,7 +20,7 @@ function QuizResults() {
 
   return (
     <div className={styles.container}>
-      <h1>Quiz Submissions</h1>
+      <h1 className={styles.title}>Quiz Submissions</h1>
       {submissions.length > 0 ? (
         <table className={styles.resultsTable}>
           <thead>
@@ -36,14 +36,14 @@ function QuizResults() {
               <tr key={sub._id}>
                 <td>{sub.student.name}</td>
                 <td>{sub.student.email}</td>
-                <td>{sub.score} / {sub.totalQuestions}</td>
+                <td className={styles.score}>{sub.score} / {sub.totalQuestions}</td>
                 <td>{new Date(sub.createdAt).toLocaleString()}</td>
               </tr>
             ))}
           </tbody>
         </table>
       ) : (
-        <p>No students have submitted this quiz yet.</p>
+        <p className={styles.noSubmissions}>No students have submitted this quiz yet.</p>
       )}
     </div>
   );
